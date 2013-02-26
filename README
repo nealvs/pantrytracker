@@ -1,4 +1,13 @@
-This is your new Play 2.1 application
+Play 2.1 application
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+Pantry tracking that includes the following entities:
+
+Account
+User
+
+Location
+Category
+Item Type
+Item Instance
+
