@@ -2,10 +2,7 @@ package models.tracker;
 
 import com.avaje.ebean.Ebean;
 import java.util.*;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import models.account.Account;
 import models.account.User;
 import play.data.format.Formats;
@@ -13,36 +10,34 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 @Entity 
-public class Category extends Model {
+public class ItemCategory extends Model {
 
     @Id
-    public Long id;
+    @Column(name = "item_category_id")
+    public Long itemCategoryId;
     
     @Constraints.Required
-    public String title;
+    public String name;
     
-    public boolean done = false;
-    
-    @Formats.DateTime(pattern="MM/dd/yy")
+    @Column(name = "created")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    public Date dueDate;
+    public Date created;
+    
+    @Column(name = "deleted")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    public Date deleted;
     
     @ManyToOne
-    public User assignedTo;
-    
-    public String folder;
-    
-    @ManyToOne
+    @Constraints.Required
     public Account account;
     
     // -- Queries
-    
-    public static Model.Finder<Long,Category> find = new Model.Finder(Long.class, Category.class);
+    public static Model.Finder<Long,ItemCategory> find = new Model.Finder(Long.class, ItemCategory.class);
     
     /**
      * Retrieve todo tasks for the user.
      */
-    public static List<Category> findTodoInvolving(String user) {
+    public static List<ItemCategory> findTodoInvolving(String user) {
 //       return find.join("account")
 //           .where()
 //                .eq("done", false)
@@ -54,8 +49,8 @@ public class Category extends Model {
     /**
      * Find tasks related to a project
      */
-    public static List<Category> findByAccount(Long accountId) {
-        return Category.find.where()
+    public static List<ItemCategory> findByAccount(Long accountId) {
+        return ItemCategory.find.where()
             .eq("project.id", accountId)
             .findList();
     }
@@ -87,7 +82,7 @@ public class Category extends Model {
     /**
      * Create a task
      */
-    public static Category create(Category task, Long accountId, String folder) {
+    public static ItemCategory create(ItemCategory task, Long accountId, String folder) {
         task.account = Account.find.ref(accountId);
         task.folder = folder;
         task.save();
@@ -98,7 +93,7 @@ public class Category extends Model {
      * Mark a task as done or not
      */
     public static void markAsDone(Long taskId, Boolean done) {
-        Category task = Category.find.ref(taskId);
+        ItemCategory task = ItemCategory.find.ref(taskId);
         task.done = done;
         task.update();
     }

@@ -9,11 +9,15 @@ import models.account.Account;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
-public class Location extends Model {
+
+public class Recipe extends Model {
 
     @Id
-    @Column(name = "location_id")
-    public Long locationId;
+    @Column(name = "recipe_id")
+    public Long recipeId;
+    
+    @Column(name = "name")
+    public String name;
     
     @Column(name = "created")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)

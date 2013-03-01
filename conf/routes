@@ -6,10 +6,41 @@
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.IndexController.index()
 
 GET     /login                      controllers.Login.index()
 POST    /login                      controllers.Login.login()
 
-GET     /tracker                    controllers.tracker.Dashboard.index()
+GET     /tracker                    controllers.tracker.DashboardController.index()
+
+#Category
+GET     /tracker/category                   controllers.tracker.CategoryController.index()
+GET     /tracker/category/edit              controllers.tracker.CategoryController.add()
+POST    /tracker/category/save              controllers.tracker.CategoryController.save()
+POST    /tracker/category/delete            controllers.tracker.CategoryController.delete()
+GET     /tracker/category/view              controllers.tracker.CategoryController.view()
+
+#Location
+GET     /tracker/location                   controllers.tracker.LocationController.index()
+GET     /tracker/location/edit              controllers.tracker.LocationController.add()
+POST    /tracker/location/save              controllers.tracker.LocationController.save()
+POST    /tracker/location/delete            controllers.tracker.LocationController.delete()
+GET     /tracker/location/view              controllers.tracker.LocationController.view()
+
+#ItemType
+GET     /tracker/item/type                  controllers.tracker.ItemTypeController.index()
+GET     /tracker/item/type/edit             controllers.tracker.ItemTypeController.add()
+POST    /tracker/item/type/save             controllers.tracker.ItemTypeController.save()
+POST    /tracker/item/type/delete           controllers.tracker.ItemTypeController.delete()
+GET     /tracker/item/type/view             controllers.tracker.ItemTypeController.view()
+
+#ItemInstance
+GET     /tracker/item/instance              controllers.tracker.ItemInstanceController.index()
+GET     /tracker/item/instance/edit         controllers.tracker.ItemInstanceController.add()
+POST    /tracker/item/instance/save         controllers.tracker.ItemInstanceController.save()
+POST    /tracker/item/instance/delete       controllers.tracker.ItemInstanceController.delete()
+GET     /tracker/item/instance/view         controllers.tracker.ItemInstanceController.view()
+
+
+
 

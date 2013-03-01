@@ -1,18 +1,14 @@
-package controllers;
+package controllers.tracker;
 
 import play.mvc.Controller;
 import play.mvc.Result;
 
 
-public class Login extends Controller {
+public class LocationController extends Controller {
   
     public static Result index() {
-        return TODO;
+        return ok("Location"); 
         //return ok(index.render("Your new 2 application is ready.")); 
     }
   
-    public static Result login() {
-        return TODO;
-    }
-    
 }

@@ -2,6 +2,7 @@ package models.account;
 
 import com.avaje.ebean.Ebean;
 import java.util.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -14,20 +15,13 @@ public class Account extends Model {
     @Id
     public Long id;
     
+    @Column(name = "name")
     public String name;
     
-    public String folder;
-    
-    @ManyToMany
-    public List<User> members = new ArrayList<User>();
+    @ManyToMany(mappedBy = "AccountUser")
+    public List<User> users = new ArrayList<User>();
 
     public Account() {
-    }
-    
-    public Account(String name, User owner) {
-        this.name = name;
-        this.folder = folder;
-        this.members.add(owner);
     }
     
     // -- Queries
@@ -54,11 +48,12 @@ public class Account extends Model {
     /**
      * Create a new project.
      */
-    public static Account create(String name, String folder, String owner) {
-        Account project = new Account(name, User.find.ref(owner));
-        project.save();
-        project.saveManyToManyAssociations("members");
-        return project;
+    public static Account create(String name) {
+        //Account project = new Account(name);
+        //project.save();
+        //project.saveManyToManyAssociations("members");
+        //return project;
+        return null;
     }
     
     /**
@@ -72,35 +67,25 @@ public class Account extends Model {
     }
     
     /**
-     * Rename a folder
-     */
-    public static String renameFolder(String folder, String newName) {
-        Ebean.createSqlUpdate(
-            "update project set folder = :newName where folder = :folder"
-        ).setParameter("folder", folder).setParameter("newName", newName).execute();
-        return newName;
-    }
-    
-    /**
      * Add a member to this project
      */
     public static void addMember(Long project, String user) {
-        Account p = Account.find.setId(project).fetch("members", "email").findUnique();
-        p.members.add(
+        Account p = Account.find.setId(project).fetch("users", "email").findUnique();
+        p.users.add(
             User.find.ref(user)
         );
-        p.saveManyToManyAssociations("members");
+        p.saveManyToManyAssociations("users");
     }
     
     /**
      * Remove a member from this project
      */
     public static void removeMember(Long project, String user) {
-        Account p = Account.find.setId(project).fetch("members", "email").findUnique();
-        p.members.remove(
+        Account p = Account.find.setId(project).fetch("users", "email").findUnique();
+        p.users.remove(
             User.find.ref(user)
         );
-        p.saveManyToManyAssociations("members");
+        p.saveManyToManyAssociations("users");
     }
     
     /**
@@ -115,7 +100,7 @@ public class Account extends Model {
     
     // --
     public String toString() {
-        return "Account(" + id + ") with " + (members == null ? "null" : members.size()) + " members";
+        return "Account(" + id + ") with " + (users == null ? "null" : users.size()) + " users";
     }
     
 }
