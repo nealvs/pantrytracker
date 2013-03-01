@@ -1,29 +1,28 @@
 @(form: Form[LoginController.Login])
 
-@helper.form(routes.LoginController.login) {
-            
-    <h1>Sign in</h1>
+@main("Pantry Tracker Login") {
+    @helper.form(routes.LoginController.login) {
 
-    @if(form.hasGlobalErrors) { 
-        <p class="error">
-            @form.globalError.message
-        </p>
+        <h1 class="form-signin-heading">Log in</h1>
+
+        @if(form.hasGlobalErrors) { 
+            <p class="error">
+                @form.globalError.message
+            </p>
+        }
+        @if(flash.contains("success")) {
+            <p class="success">
+                @flash.get("success")
+            </p>
+        }
+        
+        <input class="input-block-level" type="email" name="email" placeholder="Email" value="@form("email").value">
+        <input class="input-block-level" type="password" name="password" placeholder="Password">
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <br/>
+        <button class="btn btn-large btn-primary" type="submit">Login</button>
+
     }
-
-    @if(flash.contains("success")) {
-        <p class="success">
-            @flash.get("success")
-        </p>
-    }
-
-    <p>
-        <input type="email" name="email" placeholder="Email" value="@form("email").value">
-    </p>
-    <p>
-        <input type="password" name="password" placeholder="Password">
-    </p>
-    <p>
-        <button type="submit">Login</button>
-    </p>
-
 }
