@@ -16,14 +16,12 @@ public class TrackerSecured extends Security.Authenticator {
     
     @Override
     public Result onUnauthorized(Context ctx) {
-        return redirect(routes.Login.login());
+        return redirect(routes.LoginController.index());
     }
     
     // Access rights
-    public static boolean isMemberOf(Long project) {
-        return Account.isMember(
-            project,
-            Context.current().request().username()
+    public static boolean isMemberOf(Long accountId) {
+        return Account.isMember(accountId, Context.current().request().username()
         );
     }
     

@@ -29,6 +29,7 @@ public class ItemCategory extends Model {
     
     @ManyToOne
     @Constraints.Required
+    @JoinColumn(name="account_id")
     public Account account;
     
     // -- Queries
@@ -82,11 +83,10 @@ public class ItemCategory extends Model {
     /**
      * Create a task
      */
-    public static ItemCategory create(ItemCategory task, Long accountId, String folder) {
-        task.account = Account.find.ref(accountId);
-        task.folder = folder;
-        task.save();
-        return task;
+    public static ItemCategory create(ItemCategory category, Long accountId) {
+        category.account = Account.find.ref(accountId);
+        category.save();
+        return category;
     }
     
     /**
@@ -94,7 +94,6 @@ public class ItemCategory extends Model {
      */
     public static void markAsDone(Long taskId, Boolean done) {
         ItemCategory task = ItemCategory.find.ref(taskId);
-        task.done = done;
         task.update();
     }
     
@@ -110,6 +109,6 @@ public class ItemCategory extends Model {
 
     // --
     public String toString() {
-        return "Category(" + id + ") in project " + account;
+        return "Category(" + itemCategoryId + ") in project " + account;
     }
 }

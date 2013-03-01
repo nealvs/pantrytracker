@@ -8,8 +8,8 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 # Home page
 GET     /                           controllers.IndexController.index()
 
-GET     /login                      controllers.Login.index()
-POST    /login                      controllers.Login.login()
+GET     /login                      controllers.LoginController.index()
+POST    /login                      controllers.LoginController.login()
 
 GET     /tracker                    controllers.tracker.DashboardController.index()
 
@@ -35,11 +35,11 @@ POST    /tracker/item/type/delete           controllers.tracker.ItemTypeControll
 GET     /tracker/item/type/view             controllers.tracker.ItemTypeController.view()
 
 #ItemInstance
-GET     /tracker/item/instance              controllers.tracker.ItemInstanceController.index()
-GET     /tracker/item/instance/edit         controllers.tracker.ItemInstanceController.add()
-POST    /tracker/item/instance/save         controllers.tracker.ItemInstanceController.save()
-POST    /tracker/item/instance/delete       controllers.tracker.ItemInstanceController.delete()
-GET     /tracker/item/instance/view         controllers.tracker.ItemInstanceController.view()
+GET     /tracker/item/instance              controllers.tracker.ItemController.index()
+GET     /tracker/item/instance/edit         controllers.tracker.ItemController.add()
+POST    /tracker/item/instance/save         controllers.tracker.ItemController.save()
+POST    /tracker/item/instance/delete       controllers.tracker.ItemController.delete()
+GET     /tracker/item/instance/view         controllers.tracker.ItemController.view()
 
 
 

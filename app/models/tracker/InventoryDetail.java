@@ -2,6 +2,7 @@ package models.tracker;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import models.account.Account;
 import play.data.validation.Constraints;
@@ -17,6 +18,7 @@ public class InventoryDetail extends Model {
     
     @ManyToOne
     @Constraints.Required
+    @JoinColumn(name="account_id")
     public Account account;
     
 }

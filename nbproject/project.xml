@@ -5,6 +5,8 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>pantrytracker</name>
             <source-roots>
+                <root id="src.public.dir"/>
+                <root id="src.conf.dir"/>
                 <root id="src.dir" name="app"/>
             </source-roots>
             <test-roots>

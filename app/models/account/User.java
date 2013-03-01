@@ -15,7 +15,7 @@ public class User extends Model {
 
     @Id
     @Column(name = "user_id")
-    public Integer userId;
+    public Long userId;
     
     @Constraints.Required
     @Formats.NonEmpty
@@ -53,8 +53,8 @@ public class User extends Model {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     public Date lastLogin;
     
-    @ManyToMany(mappedBy = "AccountUser")
-    public List<Account> accounts = new ArrayList<Account>();
+//    @ManyToMany
+//    public List<Account> accounts = new ArrayList<Account>();
     
     // -- Queries
     public static Model.Finder<String,User> find = new Model.Finder(String.class, User.class);

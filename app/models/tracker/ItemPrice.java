@@ -19,6 +19,7 @@ public class ItemPrice extends Model {
     
     @ManyToOne
     @Constraints.Required
+    @JoinColumn(name="account_id")
     public Account account;
     
 }

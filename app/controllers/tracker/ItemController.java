@@ -4,10 +4,10 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 
-public class LocationController extends Controller {
+public class ItemController extends Controller {
   
     public static Result index() {
-        return ok("Location"); 
+        return ok("Item"); 
         //return ok(index.render("Your new 2 application is ready.")); 
     }
   
@@ -23,5 +23,6 @@ public class LocationController extends Controller {
     public static Result view() {
         return TODO; 
     }
+    
     
 }

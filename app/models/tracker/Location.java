@@ -1,10 +1,7 @@
 package models.tracker;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
+import javax.persistence.*;
 import models.account.Account;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -25,6 +22,7 @@ public class Location extends Model {
     
     @ManyToOne
     @Constraints.Required
+    @JoinColumn(name="account_id")
     public Account account;
     
 }

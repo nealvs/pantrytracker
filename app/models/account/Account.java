@@ -2,10 +2,7 @@ package models.account;
 
 import com.avaje.ebean.Ebean;
 import java.util.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import play.db.ebean.Model;
 
 
@@ -13,12 +10,14 @@ import play.db.ebean.Model;
 public class Account extends Model {
 
     @Id
-    public Long id;
+    @Column(name = "account_id")
+    public Long accountId;
     
     @Column(name = "name")
     public String name;
     
-    @ManyToMany(mappedBy = "AccountUser")
+    @ManyToMany
+    @JoinTable(name = "account_user")
     public List<User> users = new ArrayList<User>();
 
     public Account() {
@@ -91,16 +90,16 @@ public class Account extends Model {
     /**
      * Check if a user is a member of this project
      */
-    public static boolean isMember(Long project, String user) {
+    public static boolean isMember(Long accountId, String user) {
         return find.where()
-            .eq("members.email", user)
-            .eq("id", project)
+            .eq("users.email", user)
+            .eq("id", accountId)
             .findRowCount() > 0;
     } 
     
     // --
     public String toString() {
-        return "Account(" + id + ") with " + (users == null ? "null" : users.size()) + " users";
+        return "Account(" + accountId + ") with " + (users == null ? "null" : users.size()) + " users";
     }
     
 }
