@@ -22,17 +22,17 @@ public class LoginController extends Controller {
     
     public static Result index() {
         return ok(
-            login.render(form(Login.class))
+            login.render(Form.form(Login.class))
         );
     }
   
     public static Result login() {
-        Form<Login> loginForm = form(Login.class).bindFromRequest();
+        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if(loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));
         } else {
             session("email", loginForm.get().email);
-            return redirect(routes.tracker.DashboardController.index());
+            return redirect(controllers.tracker.routes.DashboardController.index());
         }
     }
 
